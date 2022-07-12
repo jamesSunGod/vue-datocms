@@ -221,16 +221,18 @@ export const Image = defineComponent({
       type: Object,
       default: () => ({}),
     },
-    /** Wheter the image wrapper should explicitely declare the width of the image or keep it fluid */
+    /** Whether the image wrapper should explicitely declare the width of the image or keep it fluid */
     explicitWidth: {
       type: Boolean,
     },
   },
-  setup(props) {
+  setup(props, { emit }) {
     const loaded = ref(false);
 
+    
     function handleLoad() {
       loaded.value = true;
+      emit('imageLoaded', loaded.value)
     }
 
     const { inView, elRef } = useInView({
